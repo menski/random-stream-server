@@ -1,0 +1,8 @@
+[package]
+name = "random-stream-server"
+version = "0.1.0"
+authors = ["Sebastian Menski <sebastian.menski@camunda.com>"]
+
+[dependencies]
+byteorder = "1.2.3"
+rand = "0.5.1"
