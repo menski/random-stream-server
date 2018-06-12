@@ -9,6 +9,11 @@ Pre-build release from the [release page](https://github.com/menski/random-strea
 ./random-stream-server [bind-address]
 ```
 
+Docker:
+```
+docker run --init -p 9001:9001 menski/random-stream-server:latest
+```
+
 Cargo:
 ```
 cargo run -- [bind-address]
