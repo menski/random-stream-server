@@ -11,7 +11,7 @@ Pre-build release from the [release page](https://github.com/menski/random-strea
 
 Docker:
 ```
-docker run --init -p 9001:9001 menski/random-stream-server:latest
+docker run --rm --init -p 9001:9001 menski/random-stream-server:latest
 ```
 
 Cargo:
