@@ -9,6 +9,8 @@ use std::{thread, time};
 use byteorder::{BigEndian, ReadBytesExt, WriteBytesExt};
 use rand::prelude::*;
 
+const MAX_MESSAGE_LENGTH: u64 = std::u32::MAX as u64;
+
 struct Peer {
     address: SocketAddr,
     stream: TcpStream,
@@ -71,6 +73,19 @@ impl Peer {
 
     fn read_message(&mut self) -> io::Result<String> {
         let length = self.stream.read_u64::<BigEndian>()?;
+
+        println!(
+            "Received length {} of message from {}",
+            length, self.address
+        );
+
+        if length > MAX_MESSAGE_LENGTH {
+            eprintln!(
+                "Received message with to large length of {} from {}",
+                length, self.address
+            );
+            return Err(io::ErrorKind::Other.into());
+        }
 
         let mut message = vec![0u8; length as usize];
         self.stream.read_exact(&mut message)?;
