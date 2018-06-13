@@ -16,13 +16,15 @@ struct Peer {
 
 impl Peer {
     fn new(stream: TcpStream) -> Self {
-        Peer {
-            address: stream.peer_addr().expect("Unable to get peer address"),
-            stream,
-        }
+        let address = stream.peer_addr().expect("Unable to get peer address");
+        println!("Accepting connection from {}", address);
+
+        Peer { address, stream }
     }
 
     fn run(&mut self) {
+        println!("Waiting for 'hello' message from {}", self.address);
+
         match self.read_message() {
             Ok(ref m) => {
                 if m == "hello" {
